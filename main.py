@@ -11,7 +11,6 @@ class LoginTest():
 
     def __init__(self):
         self.driver = webdriver.Chrome()
-        self.driver.implicitly_wait(10)
         self.driver.set_window_size(1000, 1000)
         self.driver.get("https://www.discoverychannel.com.tw/animalkentei/index.php")
 
