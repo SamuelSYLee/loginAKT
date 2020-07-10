@@ -1,11 +1,10 @@
 '----------------------------------------------------'
-'Automation for AP AnimalKenTei Website              '
+'Automation for AnimalKenTei Website              '
 'Copyright @ Samuel Lee                              '
 '----------------------------------------------------'
 
 class Login():
     def user_login(self, driver, username, password):
-        driver.find_element_by_xpath("//button[@class='hamburger showMT']").click()
         driver.find_element_by_xpath("//nav[@class='header-nav']/ul/li[5]").click()
 
         AccountName = driver.find_element_by_xpath("//div[1]/input[@class='input-field w50']")
@@ -19,5 +18,4 @@ class Login():
         driver.find_element_by_xpath("//button[@class='btn_signin btn_blue btn_radius']").click()
 
     def user_logout(self, driver):
-        driver.find_element_by_xpath("//button[@class='hamburger showMT']").click()
         driver.find_element_by_xpath("//nav[@class='header-nav']/ul/li[5]").click()
