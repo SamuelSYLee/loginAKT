@@ -1,5 +1,5 @@
 '----------------------------------------------------'
-'Automation for AP AnimalKenTei Website              '
+'Automation for AnimalKenTei Website              '
 'Copyright @ Samuel Lee                              '
 '----------------------------------------------------'
 
@@ -11,7 +11,8 @@ class LoginTest():
 
     def __init__(self):
         self.driver = webdriver.Chrome()
-        self.driver.set_window_size(1000, 1000)
+        self.driver.implicitly_wait(10)
+        self.driver.maximize_window()
         self.driver.get("https://www.discoverychannel.com.tw/animalkentei/index.php")
 
     def member_login(self, username, password):
@@ -32,27 +33,28 @@ def csvlines(filename):
     lines = csv.reader(open(filename, 'r'))
     return lines
 
-filetype = 'csv'
-filename = os.path.dirname(__file__) + '/info.' + filetype
+if __name__ == "__main__":
+    filetype = 'csv'
+    filename = os.path.dirname(__file__) + '/info.' + filetype
 
-if filetype == 'txt':
-    getlines = txtlines(filename)
-elif filetype == 'csv':
-    getlines = csvlines(filename)
-
-cnt = 0
-
-for line in getlines:
-    cnt = cnt + 1
     if filetype == 'txt':
-        username = line.split(',')[0]
-        password = line.split(',')[1]
+        getlines = txtlines(filename)
     elif filetype == 'csv':
-        username = line[0]
-        password = line[1]
-    
-    if cnt == 1:
-        continue
-    else:
-        userinfo = LoginTest().member_login(username, password)
-        print('Test Username: %-15s; Result: PASS' %userinfo)
+        getlines = csvlines(filename)
+
+    cnt = 0
+
+    for line in getlines:
+        cnt = cnt + 1
+        if filetype == 'txt':
+            username = line.split(',')[0]
+            password = line.split(',')[1]
+        elif filetype == 'csv':
+            username = line[0]
+            password = line[1]
+        
+        if cnt == 1:
+            continue
+        else:
+            userinfo = LoginTest().member_login(username, password)
+            print('Test Username: %-15s; Result: PASS' %userinfo)
